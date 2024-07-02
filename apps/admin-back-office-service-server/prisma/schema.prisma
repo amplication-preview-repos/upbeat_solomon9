@@ -1,0 +1,45 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model TopUpCardRequest {
+  amount         Float?
+  createdAt      DateTime                    @default(now())
+  currency       String?
+  id             String                      @id @default(cuid())
+  payementMethod String?
+  requestDate    DateTime?
+  status         EnumTopUpCardRequestStatus?
+  topupRequestId String?
+  updatedAt      DateTime                    @updatedAt
+  userId         String?
+}
+
+model CardIssueRequest {
+  businessCode     String?
+  cardRequestId    String?
+  createdAt        DateTime                              @default(now())
+  id               String                                @id @default(cuid())
+  issueDate        DateTime?
+  requestStatus    EnumCardIssueRequestRequestStatus?
+  subscriptionType EnumCardIssueRequestSubscriptionType?
+  updatedAt        DateTime                              @updatedAt
+  userId           String?
+}
+
+enum EnumTopUpCardRequestStatus {
+  Option1
+}
+
+enum EnumCardIssueRequestRequestStatus {
+  Option1
+}
+
+enum EnumCardIssueRequestSubscriptionType {
+  Option1
+}
